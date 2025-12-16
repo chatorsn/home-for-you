@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Корзина - Home for You</title>
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- Шапка -->
+    <header class="header">
+      <div class="container">
+        <div class="header-inner">
+          <a href="index.html" class="logo">
+            <i class="fas fa-home logo-icon"></i>
+            <span class="logo-text">Home for You</span>
+          </a>
+
+          <nav class="nav">
+            <ul class="nav-list">
+              <li class="nav-item">
+                <a href="index.html" class="nav-link">Главная</a>
+              </li>
+              <li class="nav-item">
+                <a href="catalog.html" class="nav-link">Каталог</a>
+              </li>
+              <li class="nav-item">
+                <a href="contacts.html" class="nav-link">Контакты</a>
+              </li>
+            </ul>
+          </nav>
+
+          <div class="header-right">
+            <div class="new-year-counter">
+              <span class="counter-text">До Нового года осталось:</span>
+              <span class="counter-days" id="days-counter">0</span>
+              <span class="counter-text">дней</span>
+            </div>
+
+            <a href="cart.html" class="cart-link">
+              <i class="fas fa-shopping-cart cart-icon"></i>
+              <span class="cart-count" id="cart-count">0</span>
+            </a>
+
+            <button
+              class="menu-toggle"
+              id="menu-toggle"
+              aria-label="Открыть меню"
+            >
+              <span class="bar"></span>
+              <span class="bar"></span>
+              <span class="bar"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="cart-page">
+      <div class="container">
+        <h1 class="page-title">Корзина</h1>
+
+        <div class="cart-content">
+          <!-- Пустая корзина -->
+          <div class="empty-cart" id="empty-cart" style="display: none">
+            <div class="empty-cart-icon">
+              <i class="fas fa-shopping-cart"></i>
+            </div>
+            <h2>Ваша корзина пуста</h2>
+            <p>Добавьте товары из каталога, чтобы оформить заказ</p>
+            <a href="catalog.html" class="btn btn-primary">Перейти в каталог</a>
+          </div>
+
+          <!-- Корзина с товарами -->
+          <div class="cart-with-items" id="cart-with-items">
+            <table class="cart-table">
+              <thead>
+                <tr>
+                  <th>Товар</th>
+                  <th>Цена</th>
+                  <th>Количество</th>
+                  <th>Сумма</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody class="cart-items">
+                <!-- Товары загружаются через JavaScript -->
+              </tbody>
+            </table>
+
+            <div class="cart-footer">
+              <div class="cart-total">
+                <span class="total-label">Итого:</span>
+                <span class="total-value" id="cart-total">0 ₽</span>
+              </div>
+
+              <div class="cart-actions">
+                <a href="catalog.html" class="btn btn-outline"
+                  >Продолжить покупки</a
+                >
+                <button class="btn btn-primary" id="checkout-btn">
+                  Оформить заказ
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Подвал -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-info">
+            <p class="copyright">© «Home for You», 2023</p>
+            <div class="contacts">
+              <a href="tel:+79999999999" class="contact-link">
+                <i class="fas fa-phone"></i>
+                +7 999 999 99 99
+              </a>
+              <a href="mailto:homeforyou@gmail.com" class="contact-link">
+                <i class="fas fa-envelope"></i>
+                homeforyou@gmail.com
+              </a>
+            </div>
+          </div>
+
+          <div class="social-links">
+            <a href="#" class="social-link" aria-label="Telegram">
+              <i class="fab fa-telegram"></i>
+            </a>
+            <a href="#" class="social-link" aria-label="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>

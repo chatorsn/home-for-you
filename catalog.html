@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Каталог товаров - Home for You</title>
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- Шапка (такая же как в index.html) -->
+    <header class="header">
+      <div class="container">
+        <div class="header-inner">
+          <a href="index.html" class="logo">
+            <i class="fas fa-home logo-icon"></i>
+            <span class="logo-text">Home for You</span>
+          </a>
+
+          <nav class="nav">
+            <ul class="nav-list">
+              <li class="nav-item">
+                <a href="index.html" class="nav-link">Главная</a>
+              </li>
+              <li class="nav-item">
+                <a href="catalog.html" class="nav-link active">Каталог</a>
+              </li>
+              <li class="nav-item">
+                <a href="contacts.html" class="nav-link">Контакты</a>
+              </li>
+            </ul>
+          </nav>
+
+          <div class="header-right">
+            <div class="new-year-counter">
+              <span class="counter-text">До Нового года осталось:</span>
+              <span class="counter-days" id="days-counter">0</span>
+              <span class="counter-text">дней</span>
+            </div>
+
+            <a href="cart.html" class="cart-link">
+              <i class="fas fa-shopping-cart cart-icon"></i>
+              <span class="cart-count" id="cart-count">0</span>
+            </a>
+
+            <button
+              class="menu-toggle"
+              id="menu-toggle"
+              aria-label="Открыть меню"
+            >
+              <span class="bar"></span>
+              <span class="bar"></span>
+              <span class="bar"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="catalog-page">
+      <div class="container">
+        <h1 class="page-title">Каталог товаров</h1>
+
+        <div class="catalog-content">
+          <!-- Фильтры -->
+          <aside class="filters">
+            <h3 class="filters-title">Фильтры</h3>
+
+            <div class="filter-group">
+              <label for="category" class="filter-label">Категория</label>
+              <select id="category" class="filter-select">
+                <option value="all">Все категории</option>
+                <option value="pajamas">Пижамы и халаты</option>
+                <option value="blankets">Пледы и подушки</option>
+                <option value="candles">Свечи и ночники</option>
+                <option value="toys">Мягкие игрушки</option>
+              </select>
+            </div>
+
+            <div class="filter-group">
+              <label for="price-range" class="filter-label">Цена, ₽</label>
+              <input
+                type="range"
+                id="price-range"
+                class="price-range"
+                min="0"
+                max="10000"
+                value="10000"
+                step="100"
+              />
+              <div class="price-values">
+                <span id="min-price">0</span> -
+                <span id="max-price">10000</span>
+              </div>
+            </div>
+
+            <button id="apply-filters" class="btn btn-primary btn-block">
+              Применить
+            </button>
+            <button id="reset-filters" class="btn btn-outline btn-block">
+              Сбросить
+            </button>
+          </aside>
+
+          <!-- Товары -->
+          <section class="catalog-products">
+            <div class="products-grid" id="products-container">
+              <!-- Товары загружаются через JavaScript -->
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <!-- Подвал (такой же как в index.html) -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-info">
+            <p class="copyright">© «Home for You», 2023</p>
+            <div class="contacts">
+              <a href="tel:+79999999999" class="contact-link">
+                <i class="fas fa-phone"></i>
+                +7 999 999 99 99
+              </a>
+              <a href="mailto:homeforyou@gmail.com" class="contact-link">
+                <i class="fas fa-envelope"></i>
+                homeforyou@gmail.com
+              </a>
+            </div>
+          </div>
+
+          <div class="social-links">
+            <a href="#" class="social-link" aria-label="Telegram">
+              <i class="fab fa-telegram"></i>
+            </a>
+            <a href="#" class="social-link" aria-label="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>

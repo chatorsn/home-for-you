@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home for You - Новогодний интернет-магазин</title>
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- Шапка сайта -->
+    <header class="header">
+      <div class="container">
+        <div class="header-inner">
+          <!-- Логотип -->
+          <a href="index.html" class="logo">
+            <i class="fas fa-home logo-icon"></i>
+            <span class="logo-text">Home for You</span>
+          </a>
+
+          <!-- Основное меню -->
+          <nav class="nav">
+            <ul class="nav-list">
+              <li class="nav-item">
+                <a href="index.html" class="nav-link active">Главная</a>
+              </li>
+              <li class="nav-item">
+                <a href="catalog.html" class="nav-link">Каталог</a>
+              </li>
+              <li class="nav-item">
+                <a href="contacts.html" class="nav-link">Контакты</a>
+              </li>
+            </ul>
+          </nav>
+
+          <!-- Правая часть шапки -->
+          <div class="header-right">
+            <!-- Новогодний счетчик -->
+            <div class="new-year-counter">
+              <span class="counter-text">До Нового года осталось:</span>
+              <span class="counter-days" id="days-counter">0</span>
+              <span class="counter-text">дней</span>
+            </div>
+
+            <!-- Корзина -->
+            <a href="cart.html" class="cart-link">
+              <i class="fas fa-shopping-cart cart-icon"></i>
+              <span class="cart-count" id="cart-count">0</span>
+            </a>
+
+            <!-- Кнопка мобильного меню -->
+            <button
+              class="menu-toggle"
+              id="menu-toggle"
+              aria-label="Открыть меню"
+            >
+              <span class="bar"></span>
+              <span class="bar"></span>
+              <span class="bar"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Основное содержимое -->
+    <main class="main">
+      <!-- Герой-секция -->
+      <section class="hero">
+        <div class="snowfall" id="snowfall"></div>
+        <div class="container">
+          <div class="hero-content">
+            <h1 class="hero-title">Создай своё новогоднее настроение</h1>
+            <p class="hero-subtitle">
+              Уютные товары для праздничной атмосферы в вашем доме
+            </p>
+            <a href="catalog.html" class="btn btn-primary">Смотреть каталог</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Категории -->
+      <section class="categories">
+        <div class="container">
+          <h2 class="section-title">Категории товаров</h2>
+          <div class="categories-grid">
+            <!-- Категория 1 -->
+            <div class="category-card">
+              <div class="category-icon">
+                <i class="fas fa-bed"></i>
+              </div>
+              <h3 class="category-title">Пижамы и халаты</h3>
+              <p class="category-description">
+                Мягкая и теплая одежда для дома
+              </p>
+              <a href="catalog.html?category=pajamas" class="btn btn-secondary"
+                >Смотреть</a
+              >
+            </div>
+
+            <!-- Категория 2 -->
+            <div class="category-card">
+              <div class="category-icon">
+                <i class="fas fa-blanket"></i>
+              </div>
+              <h3 class="category-title">Пледы и подушки</h3>
+              <p class="category-description">Уютные аксессуары для отдыха</p>
+              <a href="catalog.html?category=blankets" class="btn btn-secondary"
+                >Смотреть</a
+              >
+            </div>
+
+            <!-- Категория 3 -->
+            <div class="category-card">
+              <div class="category-icon">
+                <i class="fas fa-candle-holder"></i>
+              </div>
+              <h3 class="category-title">Свечи и ночники</h3>
+              <p class="category-description">Теплый свет для атмосферы уюта</p>
+              <a href="catalog.html?category=candles" class="btn btn-secondary"
+                >Смотреть</a
+              >
+            </div>
+
+            <!-- Категория 4 -->
+            <div class="category-card">
+              <div class="category-icon">
+                <i class="fas fa-stuffed-toy"></i>
+              </div>
+              <h3 class="category-title">Мягкие игрушки</h3>
+              <p class="category-description">
+                Милые спутники для теплых вечеров
+              </p>
+              <a href="catalog.html?category=toys" class="btn btn-secondary"
+                >Смотреть</a
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Популярные товары -->
+      <section class="popular-products">
+        <div class="container">
+          <h2 class="section-title">Популярные товары</h2>
+          <div class="products-grid" id="products-container">
+            <!-- Товары будут загружены через JavaScript -->
+          </div>
+          <div class="section-footer">
+            <a href="catalog.html" class="btn btn-outline">Весь каталог</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Подвал сайта -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-info">
+            <p class="copyright">© «Home for You», 2023</p>
+            <div class="contacts">
+              <a href="tel:+79999999999" class="contact-link">
+                <i class="fas fa-phone"></i>
+                +7 999 999 99 99
+              </a>
+              <a href="mailto:homeforyou@gmail.com" class="contact-link">
+                <i class="fas fa-envelope"></i>
+                homeforyou@gmail.com
+              </a>
+            </div>
+          </div>
+
+          <div class="social-links">
+            <a href="#" class="social-link" aria-label="Telegram">
+              <i class="fab fa-telegram"></i>
+            </a>
+            <a href="#" class="social-link" aria-label="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Модальное окно скидки -->
+    <div class="modal" id="discount-modal">
+      <div class="modal-content">
+        <button class="modal-close" id="modal-close">&times;</button>
+        <div class="modal-body">
+          <div class="modal-icon">
+            <i class="fas fa-gift"></i>
+          </div>
+          <h3 class="modal-title">Новогодняя скидка 20%</h3>
+          <p class="modal-text">
+            Специальное предложение для создания праздничного уюта в вашем доме!
+          </p>
+          <button class="btn btn-primary" id="modal-action">
+            Получить скидку
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Подключение JavaScript -->
+    <script src="js/script.js"></script>
+  </body>
+</html>
