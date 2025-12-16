@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Товар - Home for You</title>
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- Шапка (оставить как было) -->
+    <header class="header">
+      <!-- ... код шапки ... -->
+    </header>
+
+    <main class="product-detail-page">
+      <div class="container">
+        <!-- Хлебные крошки -->
+        <nav class="breadcrumbs">
+          <a href="index.html">Главная</a> /
+          <a href="catalog.html">Каталог</a> /
+          <span id="product-category">Категория</span>
+        </nav>
+
+        <!-- Основная информация о товаре -->
+        <div class="product-main">
+          <!-- Галерея -->
+          <div class="product-gallery">
+            <div class="main-image">
+              <img
+                src="https://i.pinimg.com/1200x/7e/0a/6d/7e0a6d43a005943829ef352924ac5562.jpg"
+                alt="Товар"
+                id="main-product-image"
+                class="product-image-large"
+              />
+            </div>
+            <div class="thumbnails" id="thumbnails-container">
+              <!-- Миниатюры загружаются через JS -->
+            </div>
+          </div>
+
+          <!-- Информация -->
+          <div class="product-info-detailed">
+            <span class="product-category" id="product-category-badge"
+              >Пледы</span
+            >
+            <h1 class="product-title-large" id="product-title">
+              Название товара
+            </h1>
+
+            <div class="product-rating-large" id="product-rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="far fa-star"></i>
+              <span>(128 отзывов)</span>
+            </div>
+
+            <div class="product-price-large" id="product-price">2 999 ₽</div>
+
+            <div class="product-description-full" id="product-description">
+              Описание товара загружается...
+            </div>
+
+            <h3>Особенности:</h3>
+            <ul class="product-features-list" id="product-features">
+              <li>Загрузка...</li>
+            </ul>
+
+            <h3>Характеристики:</h3>
+            <div class="product-specs-grid" id="product-specs">
+              <!-- Загружается через JS -->
+            </div>
+
+            <!-- Выбор количества -->
+            <div class="quantity-section">
+              <div class="quantity-label">Количество:</div>
+              <div class="quantity-controls">
+                <button class="quantity-btn minus" id="quantity-minus">
+                  -
+                </button>
+                <input
+                  type="number"
+                  value="1"
+                  min="1"
+                  max="10"
+                  class="quantity-input"
+                  id="quantity-input"
+                />
+                <button class="quantity-btn plus" id="quantity-plus">+</button>
+              </div>
+              <div class="stock-info">
+                В наличии: <span id="stock-count">15</span> шт.
+              </div>
+            </div>
+
+            <!-- Кнопки действий -->
+            <div class="product-actions-detailed">
+              <button class="btn btn-primary btn-xlarge" id="add-to-cart-btn">
+                <i class="fas fa-shopping-cart"></i> Добавить в корзину
+              </button>
+              <button class="btn btn-accent btn-xlarge" id="buy-now-btn">
+                <i class="fas fa-bolt"></i> Купить сейчас
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Похожие товары -->
+        <section class="similar-products-section">
+          <h2 class="section-title">Похожие товары</h2>
+          <div class="products-grid" id="similar-products">
+            <!-- Загружается через JS -->
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Подвал (оставить как было) -->
+    <footer class="footer">
+      <!-- ... код подвала ... -->
+    </footer>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>

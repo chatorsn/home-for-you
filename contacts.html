@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Корзина - Home for You</title>
+    <title>Контакты - Home for You</title>
     <link rel="stylesheet" href="css/normalize.css" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -18,7 +18,6 @@
     />
   </head>
   <body>
-    <!-- Шапка -->
     <header class="header">
       <div class="container">
         <div class="header-inner">
@@ -36,7 +35,7 @@
                 <a href="catalog.html" class="nav-link">Каталог</a>
               </li>
               <li class="nav-item">
-                <a href="contact.html" class="nav-link">Контакты</a>
+                <a href="contacts.html" class="nav-link active">Контакты</a>
               </li>
             </ul>
           </nav>
@@ -67,59 +66,99 @@
       </div>
     </header>
 
-    <main class="cart-page">
+    <main class="contacts-page">
       <div class="container">
-        <h1 class="page-title">Корзина</h1>
+        <h1 class="page-title">Контакты</h1>
 
-        <!-- Пустая корзина -->
-        <div class="empty-cart" id="empty-cart">
-          <div class="empty-cart-icon">
-            <i class="fas fa-shopping-cart"></i>
-          </div>
-          <h2>Ваша корзина пуста</h2>
-          <p>Добавьте товары из каталога, чтобы оформить заказ</p>
-          <a href="catalog.html" class="btn btn-primary">Перейти в каталог</a>
-        </div>
-
-        <!-- Корзина с товарами -->
-        <div class="cart-with-items" id="cart-with-items" style="display: none">
-          <div class="cart-table-container">
-            <table class="cart-table">
-              <thead>
-                <tr>
-                  <th>Товар</th>
-                  <th>Цена</th>
-                  <th>Количество</th>
-                  <th>Сумма</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody id="cart-items-body">
-                <!-- Товары загружаются через JavaScript -->
-              </tbody>
-            </table>
-          </div>
-
-          <div class="cart-summary">
-            <div class="cart-total">
-              <span class="total-label">Итого:</span>
-              <span class="total-value" id="cart-total">0 ₽</span>
+        <div class="contacts-content">
+          <div class="contact-info">
+            <div class="contact-card">
+              <div class="contact-icon">
+                <i class="fas fa-map-marker-alt"></i>
+              </div>
+              <h3 class="contact-title">Адрес</h3>
+              <p class="contact-text">г. Москва, ул. Новогодняя, д. 25</p>
             </div>
 
-            <div class="cart-actions">
-              <a href="catalog.html" class="btn btn-outline"
-                >Продолжить покупки</a
+            <div class="contact-card">
+              <div class="contact-icon">
+                <i class="fas fa-phone"></i>
+              </div>
+              <h3 class="contact-title">Телефон</h3>
+              <a href="tel:+79999999999" class="contact-text"
+                >+7 999 999 99 99</a
               >
-              <button class="btn btn-primary" id="checkout-btn">
-                Оформить заказ
+            </div>
+
+            <div class="contact-card">
+              <div class="contact-icon">
+                <i class="fas fa-envelope"></i>
+              </div>
+              <h3 class="contact-title">Email</h3>
+              <a href="mailto:homeforyou@gmail.com" class="contact-text"
+                >homeforyou@gmail.com</a
+              >
+            </div>
+
+            <div class="contact-card">
+              <div class="contact-icon">
+                <i class="fas fa-clock"></i>
+              </div>
+              <h3 class="contact-title">Время работы</h3>
+              <p class="contact-text">
+                Пн-Пт: 9:00 - 21:00<br />Сб-Вс: 10:00 - 20:00
+              </p>
+            </div>
+          </div>
+
+          <div class="contact-form-section">
+            <h2 class="section-title">Напишите нам</h2>
+            <form id="contact-form" class="contact-form">
+              <div class="form-group">
+                <label for="name">Имя *</label>
+                <input type="text" id="name" class="form-control" required />
+              </div>
+
+              <div class="form-group">
+                <label for="email">Email *</label>
+                <input type="email" id="email" class="form-control" required />
+              </div>
+
+              <div class="form-group">
+                <label for="message">Сообщение *</label>
+                <textarea
+                  id="message"
+                  class="form-control"
+                  rows="5"
+                  required
+                ></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary">
+                Отправить сообщение
               </button>
+            </form>
+          </div>
+        </div>
+
+        <div class="map-container">
+          <h2 class="section-title">Мы на карте</h2>
+          <div class="map-placeholder">
+            <div class="map-info">
+              <p>В реальном проекте здесь будет интерактивная карта</p>
+              <p>Например, можно использовать:</p>
+              <ul>
+                <li>Яндекс.Карты</li>
+                <li>Google Maps</li>
+                <li>Leaflet.js</li>
+              </ul>
+              <p>Для теста можно вставить iframe или статичное изображение</p>
             </div>
           </div>
         </div>
       </div>
     </main>
 
-    <!-- Подвал -->
     <footer class="footer">
       <div class="container">
         <div class="footer-content">
