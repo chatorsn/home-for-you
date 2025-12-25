@@ -15,26 +15,15 @@ const elements = {
   discountModal: document.getElementById("discount-modal"),
   modalClose: document.getElementById("modal-close"),
   modalAction: document.getElementById("modal-action"),
-  snowfall: document.getElementById("snowfall"),
 };
 
 // ========== ИНИЦИАЛИЗАЦИЯ ==========
 document.addEventListener("DOMContentLoaded", function () {
-  // Загружаем товары
   loadProducts();
-  enrichProductsWithDetails();
-
-  // Загрузка корзины
   loadCartFromStorage();
   updateCartCount();
-
-  // Инициализация компонентов
   initNewYearCounter();
   initMobileMenu();
-
-  if (elements.snowfall) {
-    initSnowfall();
-  }
 
   if (elements.productsContainer) {
     renderProducts();
@@ -61,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
     initProductPage();
   }
 
-  if (window.location.pathname.includes("contact.html")) {
+  if (window.location.pathname.includes("contacts.html")) {
     initContactForm();
   }
 });
@@ -75,26 +64,55 @@ function loadProducts() {
       price: 2499,
       category: "blankets",
       image:
-        "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=400&fit=crop",
+        "https://i.pinimg.com/1200x/8f/9a/38/8f9a380872da4e6b7e508767db14f288.jpg",
       rating: 5,
+      description: "Мягкий и теплый плед из 100% хлопка с новогодним узором.",
+      categoryName: "Пледы и подушки",
+      stock: 15,
+      features: [
+        "100% хлопок",
+        "Размер 150×200 см",
+        "Можно стирать",
+        "Не линяет",
+      ],
     },
+
     {
       id: 2,
-      name: "Теплая пижама с оленями",
+      name: "Теплая пижама ",
       price: 1899,
       category: "pajamas",
       image:
-        "https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?w=400&h=400&fit=crop",
+        "https://i.pinimg.com/1200x/dc/a0/f2/dca0f2fde5efb7b2c0c80bfbbc79bbae.jpg",
       rating: 4,
+      description: "Уютная пижама из мягкого флиса.",
+      categoryName: "Пижамы и халаты",
+      stock: 15,
+      features: [
+        "Мягкий флис",
+        "Эластичные манжеты",
+        "Не линяет",
+        "Два кармана",
+      ],
     },
+
     {
       id: 3,
       name: "Ароматическая свеча 'Ель'",
       price: 899,
       category: "candles",
       image:
-        "https://images.unsplash.com/photo-1590736966893-6c6d6b70a63e?w=400&h=400&fit=crop",
+        "https://i.pinimg.com/1200x/9e/29/c5/9e29c5532f6e7d8440b41e5a0f28cca1.jpg",
       rating: 5,
+      description: "Свеча с натуральным ароматом новогодней ели.",
+      categoryName: "Свечи и ночники",
+      stock: 25,
+      features: [
+        "Натуральный воск",
+        "Аромат ели",
+        "Горит 40 часов",
+        "Стеклянная баночка",
+      ],
     },
     {
       id: 4,
@@ -102,17 +120,30 @@ function loadProducts() {
       price: 1299,
       category: "toys",
       image:
-        "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=400&h=400&fit=crop",
+        "https://i.pinimg.com/736x/5c/0d/08/5c0d08a63e9edc1b4abb60dce4a0df31.jpg",
       rating: 4,
+      description: "Милый снеговик из мягкого плюша. Высота 35 см.",
+      categoryName: "Мягкие игрушки",
+      stock: 12,
+      features: [
+        "Мягкий плюш",
+        "Безопасные глаза",
+        "Можно стирать",
+        "Гипоаллергенный",
+      ],
     },
     {
       id: 5,
-      name: "Ночник 'Северное сияние'",
+      name: "Ночник 'Ночной лес'",
       price: 1999,
       category: "candles",
       image:
-        "https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=400&h=400&fit=crop",
+        "https://i.pinimg.com/736x/c8/28/2a/c8282a91262fe471c0b1833ef5ad2db7.jpg",
       rating: 5,
+      description: "Ночник тематический.",
+      categoryName: "Свечи и ночники",
+      stock: 10,
+      features: ["USB-зарядка", "7 цветов", "Регулировка яркости", "Таймер"],
     },
     {
       id: 6,
@@ -120,17 +151,35 @@ function loadProducts() {
       price: 2999,
       category: "pajamas",
       image:
-        "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=400&h=400&fit=crop",
+        "https://i.pinimg.com/1200x/78/72/0e/78720ead9a06faec6226d147c58e064c.jpg",
       rating: 5,
+      description: "Теплый халат из флиса для уютных вечеров.",
+      categoryName: "Пижамы и халаты",
+      stock: 7,
+      features: [
+        "Два кармана",
+        "Пояс",
+        "Манжеты на рукавах",
+        "Не садится после стирки",
+      ],
     },
     {
       id: 7,
-      name: "Подушка 'Рождественский носок'",
+      name: "Подушка 'Леденец'",
       price: 999,
       category: "blankets",
       image:
-        "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=400&fit=crop",
+        "https://i.pinimg.com/736x/99/7b/4e/997b4ecb9d0dbf4d2e1563de2910398c.jpg",
       rating: 4,
+      description: "Декоративная подушка в форме леденца.",
+      categoryName: "Пледы и подушки",
+      stock: 20,
+      features: [
+        "Декоративная",
+        "Съемный чехол",
+        "Антиаллергенная",
+        "Мягкая набивка",
+      ],
     },
     {
       id: 8,
@@ -138,193 +187,22 @@ function loadProducts() {
       price: 1599,
       category: "toys",
       image:
-        "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=400&h=400&fit=crop",
+        "https://i.pinimg.com/736x/c9/c8/b9/c9c8b947be6eda5c53b22fff0bc2adb7.jpg",
       rating: 5,
-    },
-    {
-      id: 9,
-      name: "Плед 'Новогодние узоры'",
-      price: 2799,
-      category: "blankets",
-      image:
-        "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=400&fit=crop",
-      rating: 4,
-    },
-    {
-      id: 10,
-      name: "Пижама 'Снежинки'",
-      price: 1699,
-      category: "pajamas",
-      image:
-        "https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?w=400&h=400&fit=crop",
-      rating: 5,
-    },
-    {
-      id: 11,
-      name: "Свеча 'Мандарин и корица'",
-      price: 799,
-      category: "candles",
-      image:
-        "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=400&h=400&fit=crop",
-      rating: 4,
-    },
-    {
-      id: 12,
-      name: "Игрушка 'Эльф'",
-      price: 1199,
-      category: "toys",
-      image:
-        "https://images.unsplash.com/photo-1531259683007-016a7b628fc3?w=400&h=400&fit=crop",
-      rating: 5,
+      description: "Мягкая игрушка оленя Рудольфа с красным носом.",
+      categoryName: "Мягкие игрушки",
+      stock: 15,
+      features: [
+        "Светящийся нос",
+        "Мягкий плюш",
+        "Безопасные материалы",
+        "Для детей от 3 лет",
+      ],
     },
   ];
 }
 
-// ========== ПОДРОБНЫЕ ДАННЫЕ ТОВАРОВ ==========
-function enrichProductsWithDetails() {
-  const productDetails = {
-    1: {
-      description:
-        "Мягкий и теплый плед из 100% хлопка с новогодним узором. Идеально подходит для холодных зимних вечеров, создает уютную атмосферу в вашем доме. Размер 150×200 см.",
-      features: [
-        "100% хлопок",
-        "Мягкая ткань",
-        "Не вызывает аллергии",
-        "Легко стирается",
-        "Размер 150×200 см",
-      ],
-      specs: {
-        Материал: "100% хлопок",
-        Размер: "150×200 см",
-        Вес: "1.2 кг",
-        Цвет: "Зеленый с белым узором",
-        Уход: "Стирка при 30°C",
-      },
-      images: [
-        "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop",
-        "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=600&fit=crop",
-        "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&h=600&fit=crop",
-      ],
-      categoryName: "Пледы и подушки",
-      stock: 15,
-      sku: "HFY-PLD-001",
-    },
-    2: {
-      description:
-        "Уютная пижама из мягкого флиса с новогодним принтом оленей. Не стесняет движений, сохраняет тепло. Идеальна для зимнего отдыха дома. Доступна в размерах S, M, L, XL.",
-      features: [
-        "Мягкий флис",
-        "Эластичные манжеты",
-        "Не линяет при стирке",
-        "Два кармана",
-        "Комплект: кофта + брюки",
-      ],
-      specs: {
-        Материал: "Флис",
-        Размеры: "S, M, L, XL",
-        Цвет: "Красный с белым",
-        Комплект: "Кофта + брюки",
-        Уход: "Стирка при 40°C",
-      },
-      images: [
-        "https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?w=800&h=600&fit=crop",
-        "https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?w=800&h=600&fit=crop",
-        "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=600&fit=crop",
-      ],
-      categoryName: "Пижамы и халаты",
-      stock: 8,
-      sku: "HFY-PJ-002",
-    },
-    3: {
-      description:
-        "Свеча с натуральным ароматом новогодней ели. Горит до 40 часов, создавая праздничную атмосферу и уют в вашем доме. Изготовлена из соевого воска.",
-      features: [
-        "Натуральный воск",
-        "Аромат ели",
-        "Горит 40 часов",
-        "Стеклянная баночка",
-        "Безопасный фитиль",
-      ],
-      specs: {
-        Материал: "Соевый воск",
-        "Время горения": "40 часов",
-        Вес: "300 г",
-        Аромат: "Ель и мандарин",
-        Размер: "Ø8×8 см",
-      },
-      images: [
-        "https://images.unsplash.com/photo-1590736966893-6c6d6b70a63e?w=800&h=600&fit=crop",
-        "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=800&h=600&fit=crop",
-        "https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?w=800&h=600&fit=crop",
-      ],
-      categoryName: "Свечи и ночники",
-      stock: 25,
-      sku: "HFY-CND-003",
-    },
-    4: {
-      description:
-        "Милый снеговик из мягкого плюша. Высота 35 см, безопасен для детей. Отличный подарок на Новый год для детей и взрослых.",
-      features: [
-        "Мягкий плюш",
-        "Безопасные глаза",
-        "Можно стирать",
-        "Высота 35 см",
-        "Гипоаллергенный",
-      ],
-      specs: {
-        Материал: "Плюш, синтепон",
-        Высота: "35 см",
-        Возраст: "От 3 лет",
-        Цвет: "Белый с оранжевым",
-        Уход: "Ручная стирка",
-      },
-      images: [
-        "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=800&h=600&fit=crop",
-        "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=800&h=600&fit=crop",
-        "https://images.unsplash.com/photo-1531259683007-016a7b628fc3?w=800&h=600&fit=crop",
-      ],
-      categoryName: "Мягкие игрушки",
-      stock: 12,
-      sku: "HFY-TOY-004",
-    },
-  };
-
-  // Добавляем подробные данные к товарам
-  products.forEach((product) => {
-    const details = productDetails[product.id];
-    if (details) {
-      Object.assign(product, details);
-    } else {
-      // Дефолтные данные если нет подробностей
-      Object.assign(product, {
-        description: `Качественный ${product.name.toLowerCase()}. Идеально подходит для новогодних праздников.`,
-        features: [
-          "Высокое качество",
-          "Удобно в использовании",
-          "Долговечность",
-          "Безопасность",
-        ],
-        specs: {
-          Материал: "Качественные материалы",
-          Размер: "Стандартный",
-          Вес: "1 кг",
-          Цвет: "Разные варианты",
-          Уход: "По инструкции",
-        },
-        images: [
-          product.image.replace("w=400", "w=800").replace("h=400", "h=600"),
-          product.image.replace("w=400", "w=800").replace("h=400", "h=600"),
-          product.image.replace("w=400", "w=800").replace("h=400", "h=600"),
-        ],
-        categoryName: getCategoryName(product.category),
-        stock: Math.floor(Math.random() * 20) + 5,
-        sku: `HFY-${String(product.id).padStart(3, "0")}`,
-      });
-    }
-  });
-}
-
-// ========== КОРЗИНА (базовые функции) ==========
+// ========== КОРЗИНА ==========
 function loadCartFromStorage() {
   const savedCart = localStorage.getItem("homeForYouCart");
   if (savedCart) {
@@ -358,18 +236,11 @@ function addToCart(productId, quantity = 1) {
   cartCount += quantity;
   updateCartCount();
   saveCartToStorage();
-
   showNotification(`"${product.name}" добавлен в корзину!`);
-
-  // Обновляем отображение если находимся на странице корзины
-  if (window.location.pathname.includes("cart.html")) {
-    updateCartDisplay();
-  }
 }
 
 function removeFromCart(productId) {
   const itemIndex = cartItems.findIndex((item) => item.id === productId);
-
   if (itemIndex !== -1) {
     cartCount -= cartItems[itemIndex].quantity;
     cartItems.splice(itemIndex, 1);
@@ -377,22 +248,6 @@ function removeFromCart(productId) {
     saveCartToStorage();
     return true;
   }
-
-  return false;
-}
-
-function updateCartItemQuantity(productId, newQuantity) {
-  const item = cartItems.find((item) => item.id === productId);
-
-  if (item) {
-    const quantityDiff = newQuantity - item.quantity;
-    item.quantity = newQuantity;
-    cartCount += quantityDiff;
-    updateCartCount();
-    saveCartToStorage();
-    return true;
-  }
-
   return false;
 }
 
@@ -400,48 +255,25 @@ function updateCartCount() {
   if (elements.cartCount) {
     elements.cartCount.textContent = cartCount;
   }
-
-  const allCartCounts = document.querySelectorAll(".cart-count");
-  allCartCounts.forEach((element) => {
-    element.textContent = cartCount;
-  });
 }
 
 // ========== НОВОГОДНИЙ СЧЕТЧИК ==========
 function initNewYearCounter() {
   if (!elements.daysCounter) return;
-
-  function updateCounter() {
-    const now = new Date();
-    const currentYear = now.getFullYear();
-
-    // Всегда считаем до следующего 1 января
-    const newYear = new Date(currentYear + 1, 0, 1);
-    const diff = newYear - now;
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-
-    elements.daysCounter.textContent = days;
-  }
-
-  updateCounter();
-  setInterval(updateCounter, 1000 * 60 * 60);
+  const now = new Date();
+  const currentYear = now.getFullYear();
+  const newYear = new Date(currentYear + 1, 0, 1);
+  const diff = newYear - now;
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  elements.daysCounter.textContent = days;
 }
 
 // ========== МОБИЛЬНОЕ МЕНЮ ==========
 function initMobileMenu() {
   if (!elements.menuToggle || !elements.nav) return;
-
   elements.menuToggle.addEventListener("click", function () {
     elements.nav.classList.toggle("active");
     this.classList.toggle("active");
-  });
-
-  const navLinks = document.querySelectorAll(".nav-link");
-  navLinks.forEach((link) => {
-    link.addEventListener("click", function () {
-      elements.nav.classList.remove("active");
-      elements.menuToggle.classList.remove("active");
-    });
   });
 }
 
@@ -450,22 +282,17 @@ function initModal() {
   if (!elements.discountModal || !elements.modalClose || !elements.modalAction)
     return;
 
-  elements.modalClose.addEventListener("click", function () {
-    elements.discountModal.style.display = "none";
-  });
+  elements.modalClose.addEventListener(
+    "click",
+    () => (elements.discountModal.style.display = "none")
+  );
+  elements.modalAction.addEventListener(
+    "click",
+    () => (window.location.href = "catalog.html")
+  );
 
-  elements.modalAction.addEventListener("click", function () {
-    window.location.href = "catalog.html";
-  });
-
-  elements.discountModal.addEventListener("click", function (e) {
-    if (e.target === this) {
-      this.style.display = "none";
-    }
-  });
-
-  document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape" && elements.discountModal.style.display === "flex") {
+  elements.discountModal.addEventListener("click", (e) => {
+    if (e.target === elements.discountModal) {
       elements.discountModal.style.display = "none";
     }
   });
@@ -473,34 +300,21 @@ function initModal() {
 
 function showDiscountModal() {
   if (!elements.discountModal) return;
-
-  const modalShown = localStorage.getItem("discountModalShown");
-  if (!modalShown) {
-    elements.discountModal.style.display = "flex";
-    localStorage.setItem("discountModalShown", "true");
-  }
+  elements.discountModal.style.display = "flex";
 }
 
 // ========== УВЕДОМЛЕНИЯ ==========
 function showNotification(message) {
   const notification = document.createElement("div");
   notification.className = "notification";
-  notification.innerHTML = `
-        <i class="fas fa-check-circle notification-icon"></i>
-        <span class="notification-text">${message}</span>
-    `;
-
+  notification.textContent = message;
   document.body.appendChild(notification);
 
-  setTimeout(() => {
-    notification.classList.add("show");
-  }, 10);
+  setTimeout(() => notification.classList.add("show"), 10);
 
   setTimeout(() => {
     notification.classList.remove("show");
-    setTimeout(() => {
-      notification.remove();
-    }, 300);
+    setTimeout(() => notification.remove(), 300);
   }, 3000);
 }
 
@@ -508,11 +322,10 @@ function showNotification(message) {
 function renderStars(rating) {
   let stars = "";
   for (let i = 1; i <= 5; i++) {
-    if (i <= rating) {
-      stars += '<i class="fas fa-star star"></i>';
-    } else {
-      stars += '<i class="far fa-star star"></i>';
-    }
+    stars +=
+      i <= rating
+        ? '<i class="fas fa-star star"></i>'
+        : '<i class="far fa-star star"></i>';
   }
   return stars;
 }
@@ -521,88 +334,46 @@ function formatPrice(price) {
   return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 }
 
-function getCategoryName(category) {
-  const categories = {
-    pajamas: "Пижамы и халаты",
-    blankets: "Пледы и подушки",
-    candles: "Свечи и ночники",
-    toys: "Мягкие игрушки",
-  };
-  return categories[category] || category;
-}
-
-// ========== СОЗДАНИЕ КАРТОЧКИ ТОВАРА С БЕЙДЖЕМ ==========
+// ========== КАРТОЧКА ТОВАРА ==========
 function createProductCard(product) {
   const card = document.createElement("div");
   card.className = "product-card";
-
-  // Определяем бейдж в зависимости от категории
-  let badge = "";
-  if (product.category === "pajamas") {
-    badge = '<span class="product-badge">Пижама</span>';
-  } else if (product.category === "blankets") {
-    badge = '<span class="product-badge">Плед</span>';
-  } else if (product.category === "candles") {
-    badge = '<span class="product-badge">Свеча</span>';
-  } else if (product.category === "toys") {
-    badge = '<span class="product-badge">Игрушка</span>';
-  }
-
   card.innerHTML = `
-        <div class="product-card-inner">
-            <div class="product-image-container">
-                <img src="${product.image}" alt="${
-    product.name
-  }" class="product-image">
-                ${badge}
-                <div class="product-watermark">🎅</div>
-            </div>
-            <div class="product-info">
-                <h3 class="product-title">${product.name}</h3>
-                <div class="product-rating">
-                    ${renderStars(product.rating)}
-                    <span class="rating-count">(${
-                      Math.floor(Math.random() * 50) + 20
-                    })</span>
-                </div>
-                <div class="product-price">${formatPrice(product.price)} ₽</div>
-                <div class="product-actions">
-                    <button class="btn btn-primary btn-small add-to-cart-btn" data-id="${
-                      product.id
-                    }">
-                        В корзину
-                    </button>
-                    <a href="product.html?id=${
-                      product.id
-                    }" class="btn btn-outline btn-small view-details-btn">
-                        Подробнее
-                    </a>
-                </div>
-            </div>
+    <div class="product-card-inner">
+      <div class="product-image-container">
+        <img src="${product.image}" alt="${product.name}" class="product-image">
+      </div>
+      <div class="product-info">
+        <h3 class="product-title">${product.name}</h3>
+        <div class="product-rating">${renderStars(product.rating)}</div>
+        <div class="product-price">${formatPrice(product.price)} ₽</div>
+        <div class="product-actions">
+          <button class="btn btn-primary btn-small add-to-cart-btn" data-id="${
+            product.id
+          }">В корзину</button>
+          <a href="product.html?id=${
+            product.id
+          }" class="btn btn-outline btn-small view-details-btn">Подробнее</a>
         </div>
-    `;
+      </div>
+    </div>
+  `;
   return card;
 }
 
 // ========== ОТОБРАЖЕНИЕ ТОВАРОВ ==========
-// Отображение товаров
 function renderProducts(filteredProducts = null) {
-  const container = document.getElementById("products-container");
+  const container = elements.productsContainer;
   if (!container) return;
 
   const productsToRender = filteredProducts || products;
-
-  // Определяем сколько товаров показывать
   let productsToShow;
+
   if (
     window.location.pathname.includes("index.html") ||
     window.location.pathname === "/"
   ) {
-    // На главной - 6 товаров
-    productsToShow = productsToRender.slice(0, 6);
-  } else if (window.location.pathname.includes("catalog.html")) {
-    // В каталоге - все товары
-    productsToShow = productsToRender;
+    productsToShow = productsToRender.slice(0, 4);
   } else {
     productsToShow = productsToRender;
   }
@@ -610,24 +381,16 @@ function renderProducts(filteredProducts = null) {
   container.innerHTML = "";
 
   if (productsToShow.length === 0) {
-    container.innerHTML = `
-            <div style="grid-column: 1 / -1; text-align: center; padding: 40px;">
-                <p>Товары не найдены</p>
-            </div>
-        `;
+    container.innerHTML =
+      '<div style="grid-column: 1 / -1; text-align: center; padding: 40px;"><p>Товары не найдены</p></div>';
     return;
   }
 
   productsToShow.forEach((product) => {
-    const card = createProductCard(product);
-    container.appendChild(card);
+    container.appendChild(createProductCard(product));
   });
 
-  // Обработчики для кнопок
-  addProductEventListeners();
-}
-
-function addProductEventListeners() {
+  // Обработчики для кнопок "В корзину"
   document.querySelectorAll(".add-to-cart-btn").forEach((button) => {
     button.addEventListener("click", function () {
       const productId = parseInt(this.getAttribute("data-id"));
@@ -635,102 +398,21 @@ function addProductEventListeners() {
     });
   });
 }
+
 // ========== КАТАЛОГ ==========
 function initCatalogFilters() {
-  // Применение фильтров
   const applyFiltersBtn = document.getElementById("apply-filters");
   const resetFiltersBtn = document.getElementById("reset-filters");
   const sortSelect = document.getElementById("sort-by");
 
   if (!applyFiltersBtn || !resetFiltersBtn || !sortSelect) return;
 
-  // Применение фильтров
   applyFiltersBtn.addEventListener("click", applyCatalogFilters);
-
-  // Сброс фильтров
-  resetFiltersBtn.addEventListener("click", function () {
-    // Сброс радио-кнопок категорий
-    document.querySelector(
-      'input[name="category"][value="all"]'
-    ).checked = true;
-
-    // Сброс радио-кнопок рейтинга
-    document.querySelector('input[name="rating"][value="all"]').checked = true;
-
-    // Сброс цены
-    const priceMin = document.getElementById("price-min");
-    const priceMax = document.getElementById("price-max");
-    const priceSlider = document.getElementById("price-slider");
-
-    if (priceMin) priceMin.value = "0";
-    if (priceMax) priceMax.value = "10000";
-    if (priceSlider) priceSlider.value = "10000";
-
-    // Обновление отображения значения слайдера
-    const priceSliderValue = document.querySelector(".price-slider-value");
-    if (priceSliderValue) {
-      priceSliderValue.textContent = `До: ${formatPrice(10000)} ₽`;
-    }
-
-    // Сброс сортировки
-    sortSelect.value = "default";
-
-    // Обновление отображения
-    applyCatalogFilters();
-  });
-
-  // Сортировка
+  resetFiltersBtn.addEventListener("click", resetCatalogFilters);
   sortSelect.addEventListener("change", applyCatalogFilters);
-
-  // Обновление поля максимальной цены при изменении слайдера
-  const priceSlider = document.getElementById("price-slider");
-  const priceMaxInput = document.getElementById("price-max");
-
-  if (priceSlider && priceMaxInput) {
-    const priceSliderValue = document.querySelector(".price-slider-value");
-
-    priceSlider.addEventListener("input", function () {
-      priceMaxInput.value = this.value;
-      if (priceSliderValue) {
-        priceSliderValue.textContent = `До: ${formatPrice(this.value)} ₽`;
-      }
-    });
-
-    priceMaxInput.addEventListener("change", function () {
-      priceSlider.value = this.value;
-      if (priceSliderValue) {
-        priceSliderValue.textContent = `До: ${formatPrice(this.value)} ₽`;
-      }
-    });
-  }
-
-  // Применение фильтров при изменении радио-кнопок
-  const categoryRadios = document.querySelectorAll('input[name="category"]');
-  const ratingRadios = document.querySelectorAll('input[name="rating"]');
-
-  categoryRadios.forEach((radio) => {
-    radio.addEventListener("change", applyCatalogFilters);
-  });
-
-  ratingRadios.forEach((radio) => {
-    radio.addEventListener("change", applyCatalogFilters);
-  });
-
-  // Применение фильтров при изменении цены
-  const priceMinInput = document.getElementById("price-min");
-  const priceMaxInputField = document.getElementById("price-max");
-
-  if (priceMinInput) {
-    priceMinInput.addEventListener("change", applyCatalogFilters);
-  }
-
-  if (priceMaxInputField) {
-    priceMaxInputField.addEventListener("change", applyCatalogFilters);
-  }
 }
 
 function applyCatalogFilters() {
-  // Получаем выбранные фильтры
   const selectedCategory = document.querySelector(
     'input[name="category"]:checked'
   ).value;
@@ -739,60 +421,29 @@ function applyCatalogFilters() {
   ).value;
   const sortBy = document.getElementById("sort-by").value;
 
-  // Получаем диапазон цен
-  const priceMin = parseInt(document.getElementById("price-min").value) || 0;
-  const priceMax =
-    parseInt(document.getElementById("price-max").value) || 10000;
-
-  // Фильтруем товары
   let filteredProducts = products.filter((product) => {
-    // Фильтр по категории
-    if (selectedCategory !== "all" && product.category !== selectedCategory) {
+    if (selectedCategory !== "all" && product.category !== selectedCategory)
       return false;
-    }
-
-    // Фильтр по рейтингу
-    if (selectedRating !== "all" && product.rating < parseInt(selectedRating)) {
+    if (selectedRating !== "all" && product.rating < parseInt(selectedRating))
       return false;
-    }
-
-    // Фильтр по цене
-    if (product.price < priceMin || product.price > priceMax) {
-      return false;
-    }
-
     return true;
   });
 
-  // Сортировка
-  filteredProducts = sortProducts(filteredProducts, sortBy);
+  if (sortBy === "price-asc") {
+    filteredProducts.sort((a, b) => a.price - b.price);
+  } else if (sortBy === "price-desc") {
+    filteredProducts.sort((a, b) => b.price - a.price);
+  }
 
-  // Обновляем счетчик товаров
   updateProductsCount(filteredProducts.length);
-
-  // Отображаем отфильтрованные товары
-  renderFilteredProducts(filteredProducts);
+  renderProducts(filteredProducts);
 }
 
-function sortProducts(productsArray, sortType) {
-  const sortedProducts = [...productsArray];
-
-  switch (sortType) {
-    case "price-asc":
-      return sortedProducts.sort((a, b) => a.price - b.price);
-
-    case "price-desc":
-      return sortedProducts.sort((a, b) => b.price - a.price);
-
-    case "rating-desc":
-      return sortedProducts.sort((a, b) => b.rating - a.rating);
-
-    case "name-asc":
-      return sortedProducts.sort((a, b) => a.name.localeCompare(b.name));
-
-    default:
-      return sortedProducts;
-  }
+function resetCatalogFilters() {
+  document.querySelector('input[name="category"][value="all"]').checked = true;
+  document.querySelector('input[name="rating"][value="all"]').checked = true;
+  document.getElementById("sort-by").value = "default";
+  applyCatalogFilters();
 }
 
 function updateProductsCount(count) {
@@ -802,44 +453,10 @@ function updateProductsCount(count) {
   }
 }
 
-function renderFilteredProducts(filteredProducts) {
-  const productsContainer = document.getElementById("products-container");
-  if (!productsContainer) return;
-
-  productsContainer.innerHTML = "";
-
-  if (filteredProducts.length === 0) {
-    productsContainer.innerHTML = `
-            <div class="no-products">
-                <div class="no-products-icon">
-                    <i class="fas fa-search"></i>
-                </div>
-                <h3>Товары не найдены</h3>
-                <p>Попробуйте изменить параметры фильтрации</p>
-            </div>
-        `;
-    return;
-  }
-
-  filteredProducts.forEach((product) => {
-    const productCard = createProductCard(product);
-    productsContainer.appendChild(productCard);
-  });
-
-  // Добавляем обработчики для кнопок
-  addProductEventListeners();
-}
-
 // ========== СТРАНИЦА ТОВАРА ==========
 function initProductPage() {
   const urlParams = new URLSearchParams(window.location.search);
-  const productId = parseInt(urlParams.get("id"));
-
-  if (!productId) {
-    window.location.href = "product.html?id=1";
-    return;
-  }
-
+  const productId = parseInt(urlParams.get("id")) || 1;
   const product = products.find((p) => p.id === productId);
 
   if (!product) {
@@ -847,97 +464,28 @@ function initProductPage() {
     return;
   }
 
-  loadProductDetail(product);
-}
-
-function loadProductDetail(product) {
-  // Обновляем заголовок
   document.title = `${product.name} - Home for You`;
 
-  // Хлебные крошки
   const categoryElement = document.getElementById("product-category");
   const categoryBadge = document.getElementById("product-category-badge");
-  if (categoryElement) categoryElement.textContent = product.categoryName;
-  if (categoryBadge) categoryBadge.textContent = product.categoryName;
-
-  // Основная информация
   const titleElement = document.getElementById("product-title");
   const priceElement = document.getElementById("product-price");
   const descElement = document.getElementById("product-description");
+  const stockElement = document.getElementById("stock-count");
+  const mainImage = document.getElementById("main-product-image");
 
+  if (categoryElement) categoryElement.textContent = product.categoryName;
+  if (categoryBadge) categoryBadge.textContent = product.categoryName;
   if (titleElement) titleElement.textContent = product.name;
   if (priceElement)
     priceElement.textContent = `${formatPrice(product.price)} ₽`;
   if (descElement) descElement.textContent = product.description;
-
-  // Рейтинг
-  const ratingElement = document.getElementById("product-rating");
-  if (ratingElement) {
-    ratingElement.innerHTML =
-      renderStars(product.rating) +
-      `<span> (${Math.floor(Math.random() * 200) + 50} отзывов)</span>`;
-  }
-
-  // Особенности
-  const featuresElement = document.getElementById("product-features");
-  if (featuresElement && product.features) {
-    featuresElement.innerHTML = product.features
-      .map((feature) => `<li>${feature}</li>`)
-      .join("");
-  }
-
-  // Характеристики
-  const specsElement = document.getElementById("product-specs");
-  if (specsElement && product.specs) {
-    specsElement.innerHTML = Object.entries(product.specs)
-      .map(
-        ([key, value]) => `
-                <div class="spec-item">
-                    <span class="spec-key">${key}:</span>
-                    <span class="spec-value">${value}</span>
-                </div>
-            `
-      )
-      .join("");
-  }
-
-  // Количество на складе
-  const stockElement = document.getElementById("stock-count");
-  if (stockElement && product.stock) {
-    stockElement.textContent = product.stock;
-  }
-
-  // Галерея
-  const mainImage = document.getElementById("main-product-image");
-  const thumbnailsContainer = document.getElementById("thumbnails-container");
-
-  if (mainImage && product.images && product.images.length > 0) {
-    mainImage.src = product.images[0];
+  if (stockElement) stockElement.textContent = product.stock;
+  if (mainImage) {
+    mainImage.src = product.image;
     mainImage.alt = product.name;
-
-    if (thumbnailsContainer) {
-      thumbnailsContainer.innerHTML = "";
-      product.images.forEach((image, index) => {
-        const thumbBtn = document.createElement("button");
-        thumbBtn.className = `thumbnail-btn ${index === 0 ? "active" : ""}`;
-        thumbBtn.innerHTML = `<img src="${image}" alt="${product.name} - вид ${
-          index + 1
-        }">`;
-
-        thumbBtn.addEventListener("click", () => {
-          document.querySelectorAll(".thumbnail-btn").forEach((btn) => {
-            btn.classList.remove("active");
-          });
-          thumbBtn.classList.add("active");
-          mainImage.src = image;
-        });
-
-        thumbnailsContainer.appendChild(thumbBtn);
-      });
-    }
   }
 
-  // Кнопки действий
   const addToCartBtn = document.getElementById("add-to-cart-btn");
   const buyNowBtn = document.getElementById("buy-now-btn");
   const quantityInput = document.getElementById("quantity-input");
@@ -977,7 +525,6 @@ function loadProductDetail(product) {
     });
   }
 
-  // Похожие товары
   loadSimilarProducts(product);
 }
 
@@ -992,7 +539,7 @@ function loadSimilarProducts(currentProduct) {
     )
     .slice(0, 4);
 
-  if (similarProducts.length === 0) {
+  if (similarProducts.length < 2) {
     similarProducts = products
       .filter((p) => p.id !== currentProduct.id)
       .slice(0, 4);
@@ -1000,65 +547,62 @@ function loadSimilarProducts(currentProduct) {
 
   similarContainer.innerHTML = "";
   similarProducts.forEach((product) => {
-    const card = createProductCard(product);
-    similarContainer.appendChild(card);
+    similarContainer.appendChild(createProductCard(product));
   });
 
-  // Добавляем обработчики для кнопок в похожих товарах
-  addProductEventListeners();
+  document
+    .querySelectorAll("#similar-products .add-to-cart-btn")
+    .forEach((button) => {
+      button.addEventListener("click", function () {
+        const productId = parseInt(this.getAttribute("data-id"));
+        addToCart(productId);
+      });
+    });
 }
 
 // ========== КОРЗИНА (страница) ==========
 function initCartPage() {
   updateCartDisplay();
 
-  // Обработчики событий
   document.addEventListener("click", function (e) {
-    // Удаление товара
     if (e.target.closest(".remove-item-btn")) {
-      const button = e.target.closest(".remove-item-btn");
-      const productId = parseInt(button.getAttribute("data-id"));
+      const productId = parseInt(
+        e.target.closest(".remove-item-btn").getAttribute("data-id")
+      );
       if (removeFromCart(productId)) {
         updateCartDisplay();
         showNotification("Товар удален из корзины");
       }
     }
 
-    // Увеличение количества
     if (e.target.closest(".quantity-increase")) {
-      const button = e.target.closest(".quantity-increase");
-      const productId = parseInt(button.getAttribute("data-id"));
-      const input = document.querySelector(
-        `.quantity-input[data-id="${productId}"]`
+      const productId = parseInt(
+        e.target.closest(".quantity-increase").getAttribute("data-id")
       );
-      if (input) {
-        let value = parseInt(input.value);
-        if (value < 10) {
-          input.value = value + 1;
-          updateCartItemQuantity(productId, value + 1);
-          updateCartDisplay();
-        }
+      const item = cartItems.find((item) => item.id === productId);
+      if (item && item.quantity < 10) {
+        item.quantity += 1;
+        cartCount += 1;
+        saveCartToStorage();
+        updateCartCount();
+        updateCartDisplay();
       }
     }
 
-    // Уменьшение количества
     if (e.target.closest(".quantity-decrease")) {
-      const button = e.target.closest(".quantity-decrease");
-      const productId = parseInt(button.getAttribute("data-id"));
-      const input = document.querySelector(
-        `.quantity-input[data-id="${productId}"]`
+      const productId = parseInt(
+        e.target.closest(".quantity-decrease").getAttribute("data-id")
       );
-      if (input) {
-        let value = parseInt(input.value);
-        if (value > 1) {
-          input.value = value - 1;
-          updateCartItemQuantity(productId, value - 1);
-          updateCartDisplay();
-        }
+      const item = cartItems.find((item) => item.id === productId);
+      if (item && item.quantity > 1) {
+        item.quantity -= 1;
+        cartCount -= 1;
+        saveCartToStorage();
+        updateCartCount();
+        updateCartDisplay();
       }
     }
 
-    // Оформление заказа
     if (e.target.id === "checkout-btn") {
       checkoutOrder();
     }
@@ -1079,58 +623,31 @@ function updateCartDisplay() {
     emptyCart.style.display = "none";
     cartWithItems.style.display = "block";
 
-    // Очищаем таблицу
     cartItemsBody.innerHTML = "";
-
-    // Заполняем товарами
     cartItems.forEach((item) => {
       const row = document.createElement("tr");
       row.innerHTML = `
-                <td>
-                    <div class="cart-item-info">
-                        <img src="${item.image}" alt="${
-        item.name
-      }" class="cart-item-image">
-                        <div>
-                            <div class="cart-item-name">${item.name}</div>
-                            <div class="cart-item-sku">Артикул: HFY-${String(
-                              item.id
-                            ).padStart(3, "0")}</div>
-                        </div>
-                    </div>
-                </td>
-                <td class="cart-item-price">${formatPrice(item.price)} ₽</td>
-                <td>
-                    <div class="quantity-selector">
-                        <button class="quantity-btn quantity-decrease" data-id="${
-                          item.id
-                        }">-</button>
-                        <input type="number" value="${
-                          item.quantity
-                        }" min="1" max="10" 
-                               class="quantity-input" data-id="${
-                                 item.id
-                               }" readonly>
-                        <button class="quantity-btn quantity-increase" data-id="${
-                          item.id
-                        }">+</button>
-                    </div>
-                </td>
-                <td class="cart-item-total">${formatPrice(
-                  item.price * item.quantity
-                )} ₽</td>
-                <td>
-                    <button class="remove-item-btn" data-id="${
-                      item.id
-                    }" title="Удалить">
-                        <i class="fas fa-trash"></i>
-                    </button>
-                </td>
-            `;
+        <td>${item.name}</td>
+        <td>${formatPrice(item.price)} ₽</td>
+        <td>
+          <div class="quantity-selector">
+            <button class="quantity-btn quantity-decrease" data-id="${
+              item.id
+            }">-</button>
+            <span class="quantity-value">${item.quantity}</span>
+            <button class="quantity-btn quantity-increase" data-id="${
+              item.id
+            }">+</button>
+          </div>
+        </td>
+        <td>${formatPrice(item.price * item.quantity)} ₽</td>
+        <td><button class="remove-item-btn" data-id="${
+          item.id
+        }"><i class="fas fa-trash"></i></button></td>
+      `;
       cartItemsBody.appendChild(row);
     });
 
-    // Обновляем итоговую сумму
     updateCartTotal();
   }
 }
@@ -1148,7 +665,7 @@ function updateCartTotal() {
 
 function checkoutOrder() {
   if (cartItems.length === 0) {
-    showNotification("Корзина пуста! Добавьте товары для оформления заказа.");
+    showNotification("Корзина пуста!");
     return;
   }
 
@@ -1156,108 +673,23 @@ function checkoutOrder() {
     (sum, item) => sum + item.price * item.quantity,
     0
   );
+  showNotification(`Заказ оформлен на сумму ${formatPrice(total)} ₽!`);
 
-  if (confirm(`Оформить заказ на сумму ${formatPrice(total)} ₽?`)) {
-    showNotification(
-      "Заказ оформлен! Наш менеджер свяжется с вами для подтверждения."
-    );
-
-    // Очищаем корзину
-    cartItems = [];
-    cartCount = 0;
-    saveCartToStorage();
-    updateCartCount();
-    updateCartDisplay();
-  }
+  cartItems = [];
+  cartCount = 0;
+  saveCartToStorage();
+  updateCartCount();
+  updateCartDisplay();
 }
 
 // ========== КОНТАКТЫ ==========
 function initContactForm() {
   const contactForm = document.getElementById("contact-form");
-
   if (!contactForm) return;
 
   contactForm.addEventListener("submit", function (e) {
     e.preventDefault();
-
-    const name = document.getElementById("name").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const message = document.getElementById("message").value.trim();
-
-    if (!name || !email || !message) {
-      showNotification("Пожалуйста, заполните все поля");
-      return;
-    }
-
-    if (!isValidEmail(email)) {
-      showNotification("Пожалуйста, введите корректный email");
-      return;
-    }
-
-    showNotification(
-      "Сообщение отправлено! Мы свяжемся с вами в ближайшее время."
-    );
+    showNotification("Сообщение отправлено!");
     contactForm.reset();
   });
 }
-
-function isValidEmail(email) {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(email);
-}
-
-// ========== ЭКСПОРТ ДЛЯ ОТЛАДКИ ==========
-window.HomeForYou = {
-  addToCart,
-  removeFromCart,
-  updateCartItemQuantity,
-  calculateCartTotal,
-  showNotification,
-  products,
-};
-
-// Принудительное отображение товаров
-window.addEventListener("load", function () {
-  console.log("Страница полностью загружена");
-
-  // Проверяем находимся ли мы на главной
-  const isHomePage =
-    window.location.pathname.includes("index.html") ||
-    window.location.pathname === "/" ||
-    window.location.pathname === "" ||
-    window.location.pathname.endsWith("/");
-
-  if (isHomePage) {
-    console.log("Это главная страница, отображаем товары...");
-
-    // Ждем еще немного для гарантии
-    setTimeout(() => {
-      const container = document.getElementById("products-container");
-      if (container) {
-        console.log("Контейнер найден, отображаем 6 товаров");
-
-        // Очищаем контейнер
-        container.innerHTML = "";
-
-        // Берем первые 6 товаров
-        const productsToShow = products.slice(0, 6);
-
-        // Создаем карточки
-        productsToShow.forEach((product) => {
-          const card = createProductCard(product);
-          container.appendChild(card);
-        });
-
-        // Добавляем обработчики
-        addProductEventListeners();
-
-        console.log("Товары отображены:", productsToShow.length, "шт.");
-      } else {
-        console.error("Контейнер products-container НЕ НАЙДЕН!");
-        // Попробуем найти его по другому
-        const containers = document.querySelectorAll(".products-grid");
-        console.log("Найдено контейнеров .products-grid:", containers.length);
-      }
-    }, 300);
-  }
-});
