@@ -414,20 +414,17 @@ function initNewYearCounter() {
   function updateCounter() {
     const now = new Date();
     const currentYear = now.getFullYear();
-    const nextYear =
-      now.getMonth() === 11 && now.getDate() > 31
-        ? currentYear + 1
-        : currentYear;
 
-    const newYear = new Date(nextYear, 0, 1);
+    // Всегда считаем до следующего 1 января
+    const newYear = new Date(currentYear + 1, 0, 1);
     const diff = newYear - now;
-
     const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+
     elements.daysCounter.textContent = days;
   }
 
   updateCounter();
-  setInterval(updateCounter, 24 * 60 * 60 * 1000);
+  setInterval(updateCounter, 1000 * 60 * 60);
 }
 
 // ========== МОБИЛЬНОЕ МЕНЮ ==========
@@ -446,40 +443,6 @@ function initMobileMenu() {
       elements.menuToggle.classList.remove("active");
     });
   });
-}
-
-// ========== СНЕГОПАД ==========
-function initSnowfall() {
-  if (!elements.snowfall) return;
-
-  function createSnowflake() {
-    const snowflake = document.createElement("div");
-    snowflake.className = "snowflake";
-
-    const size = Math.random() * 10 + 5;
-    const left = Math.random() * 100;
-    const opacity = Math.random() * 0.5 + 0.3;
-    const duration = Math.random() * 10 + 5;
-
-    snowflake.style.width = `${size}px`;
-    snowflake.style.height = `${size}px`;
-    snowflake.style.left = `${left}%`;
-    snowflake.style.opacity = opacity;
-    snowflake.style.animationDuration = `${duration}s`;
-    snowflake.style.animationDelay = `${Math.random() * 5}s`;
-
-    elements.snowfall.appendChild(snowflake);
-
-    setTimeout(() => {
-      snowflake.remove();
-    }, duration * 1000);
-  }
-
-  setInterval(createSnowflake, 100);
-
-  for (let i = 0; i < 20; i++) {
-    setTimeout(createSnowflake, i * 100);
-  }
 }
 
 // ========== МОДАЛЬНОЕ ОКНО ==========
@@ -622,36 +585,56 @@ function createProductCard(product) {
 }
 
 // ========== ОТОБРАЖЕНИЕ ТОВАРОВ ==========
+// Отображение товаров
 function renderProducts(filteredProducts = null) {
-  if (!elements.productsContainer) return;
+  const container = document.getElementById("products-container");
+  if (!container) return;
 
   const productsToRender = filteredProducts || products;
-  const productsForHome =
+
+  // Определяем сколько товаров показывать
+  let productsToShow;
+  if (
     window.location.pathname.includes("index.html") ||
     window.location.pathname === "/"
-      ? productsToRender.slice(0, 6)
-      : productsToRender;
+  ) {
+    // На главной - 6 товаров
+    productsToShow = productsToRender.slice(0, 6);
+  } else if (window.location.pathname.includes("catalog.html")) {
+    // В каталоге - все товары
+    productsToShow = productsToRender;
+  } else {
+    productsToShow = productsToRender;
+  }
 
-  elements.productsContainer.innerHTML = "";
+  container.innerHTML = "";
 
-  productsForHome.forEach((product) => {
-    const productCard = createProductCard(product);
-    elements.productsContainer.appendChild(productCard);
+  if (productsToShow.length === 0) {
+    container.innerHTML = `
+            <div style="grid-column: 1 / -1; text-align: center; padding: 40px;">
+                <p>Товары не найдены</p>
+            </div>
+        `;
+    return;
+  }
+
+  productsToShow.forEach((product) => {
+    const card = createProductCard(product);
+    container.appendChild(card);
   });
 
+  // Обработчики для кнопок
   addProductEventListeners();
 }
 
 function addProductEventListeners() {
-  const addToCartButtons = document.querySelectorAll(".add-to-cart-btn");
-  addToCartButtons.forEach((button) => {
+  document.querySelectorAll(".add-to-cart-btn").forEach((button) => {
     button.addEventListener("click", function () {
       const productId = parseInt(this.getAttribute("data-id"));
       addToCart(productId);
     });
   });
 }
-
 // ========== КАТАЛОГ ==========
 function initCatalogFilters() {
   // Применение фильтров
@@ -1232,3 +1215,49 @@ window.HomeForYou = {
   showNotification,
   products,
 };
+
+// Принудительное отображение товаров
+window.addEventListener("load", function () {
+  console.log("Страница полностью загружена");
+
+  // Проверяем находимся ли мы на главной
+  const isHomePage =
+    window.location.pathname.includes("index.html") ||
+    window.location.pathname === "/" ||
+    window.location.pathname === "" ||
+    window.location.pathname.endsWith("/");
+
+  if (isHomePage) {
+    console.log("Это главная страница, отображаем товары...");
+
+    // Ждем еще немного для гарантии
+    setTimeout(() => {
+      const container = document.getElementById("products-container");
+      if (container) {
+        console.log("Контейнер найден, отображаем 6 товаров");
+
+        // Очищаем контейнер
+        container.innerHTML = "";
+
+        // Берем первые 6 товаров
+        const productsToShow = products.slice(0, 6);
+
+        // Создаем карточки
+        productsToShow.forEach((product) => {
+          const card = createProductCard(product);
+          container.appendChild(card);
+        });
+
+        // Добавляем обработчики
+        addProductEventListeners();
+
+        console.log("Товары отображены:", productsToShow.length, "шт.");
+      } else {
+        console.error("Контейнер products-container НЕ НАЙДЕН!");
+        // Попробуем найти его по другому
+        const containers = document.querySelectorAll(".products-grid");
+        console.log("Найдено контейнеров .products-grid:", containers.length);
+      }
+    }, 300);
+  }
+});
