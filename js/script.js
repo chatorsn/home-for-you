@@ -1,11 +1,8 @@
-// Основной JavaScript файл для сайта Home for You
-
-// ========== ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ==========
 let cartCount = 0;
 let cartItems = [];
 let products = [];
 
-// ========== DOM ЭЛЕМЕНТЫ ==========
+// элементы страницы
 const elements = {
   cartCount: document.getElementById("cart-count"),
   daysCounter: document.getElementById("days-counter"),
@@ -17,7 +14,7 @@ const elements = {
   modalAction: document.getElementById("modal-action"),
 };
 
-// ========== ИНИЦИАЛИЗАЦИЯ ==========
+// когда страница загрузилась
 document.addEventListener("DOMContentLoaded", function () {
   loadProducts();
   loadCartFromStorage();
@@ -55,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-// ========== МАССИВ ТОВАРОВ ==========
+// список товаров
 function loadProducts() {
   products = [
     {
@@ -76,10 +73,9 @@ function loadProducts() {
         "Не линяет",
       ],
     },
-
     {
       id: 2,
-      name: "Теплая пижама ",
+      name: "Теплая пижама",
       price: 1899,
       category: "pajamas",
       image:
@@ -95,7 +91,6 @@ function loadProducts() {
         "Два кармана",
       ],
     },
-
     {
       id: 3,
       name: "Ароматическая свеча 'Ель'",
@@ -202,7 +197,7 @@ function loadProducts() {
   ];
 }
 
-// ========== КОРЗИНА ==========
+// работа с корзиной
 function loadCartFromStorage() {
   const savedCart = localStorage.getItem("homeForYouCart");
   if (savedCart) {
@@ -257,7 +252,7 @@ function updateCartCount() {
   }
 }
 
-// ========== НОВОГОДНИЙ СЧЕТЧИК ==========
+// счетчик до нового года
 function initNewYearCounter() {
   if (!elements.daysCounter) return;
   const now = new Date();
@@ -268,7 +263,7 @@ function initNewYearCounter() {
   elements.daysCounter.textContent = days;
 }
 
-// ========== МОБИЛЬНОЕ МЕНЮ ==========
+// мобильное меню
 function initMobileMenu() {
   if (!elements.menuToggle || !elements.nav) return;
   elements.menuToggle.addEventListener("click", function () {
@@ -277,7 +272,7 @@ function initMobileMenu() {
   });
 }
 
-// ========== МОДАЛЬНОЕ ОКНО ==========
+// окно скидки
 function initModal() {
   if (!elements.discountModal || !elements.modalClose || !elements.modalAction)
     return;
@@ -303,7 +298,7 @@ function showDiscountModal() {
   elements.discountModal.style.display = "flex";
 }
 
-// ========== УВЕДОМЛЕНИЯ ==========
+// уведомления
 function showNotification(message) {
   const notification = document.createElement("div");
   notification.className = "notification";
@@ -318,7 +313,7 @@ function showNotification(message) {
   }, 3000);
 }
 
-// ========== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ==========
+// мелкие функции
 function renderStars(rating) {
   let stars = "";
   for (let i = 1; i <= 5; i++) {
@@ -334,7 +329,7 @@ function formatPrice(price) {
   return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 }
 
-// ========== КАРТОЧКА ТОВАРА ==========
+// создание карточки товара
 function createProductCard(product) {
   const card = document.createElement("div");
   card.className = "product-card";
@@ -361,7 +356,7 @@ function createProductCard(product) {
   return card;
 }
 
-// ========== ОТОБРАЖЕНИЕ ТОВАРОВ ==========
+// показ товаров на странице
 function renderProducts(filteredProducts = null) {
   const container = elements.productsContainer;
   if (!container) return;
@@ -390,7 +385,7 @@ function renderProducts(filteredProducts = null) {
     container.appendChild(createProductCard(product));
   });
 
-  // Обработчики для кнопок "В корзину"
+  // обработка кнопок "в корзину"
   document.querySelectorAll(".add-to-cart-btn").forEach((button) => {
     button.addEventListener("click", function () {
       const productId = parseInt(this.getAttribute("data-id"));
@@ -399,7 +394,7 @@ function renderProducts(filteredProducts = null) {
   });
 }
 
-// ========== КАТАЛОГ ==========
+// фильтры в каталоге
 function initCatalogFilters() {
   const applyFiltersBtn = document.getElementById("apply-filters");
   const resetFiltersBtn = document.getElementById("reset-filters");
@@ -453,7 +448,7 @@ function updateProductsCount(count) {
   }
 }
 
-// ========== СТРАНИЦА ТОВАРА ==========
+// страница одного товара
 function initProductPage() {
   const urlParams = new URLSearchParams(window.location.search);
   const productId = parseInt(urlParams.get("id")) || 1;
@@ -560,7 +555,7 @@ function loadSimilarProducts(currentProduct) {
     });
 }
 
-// ========== КОРЗИНА (страница) ==========
+// страница корзины
 function initCartPage() {
   updateCartDisplay();
 
@@ -682,7 +677,7 @@ function checkoutOrder() {
   updateCartDisplay();
 }
 
-// ========== КОНТАКТЫ ==========
+// форма контактов
 function initContactForm() {
   const contactForm = document.getElementById("contact-form");
   if (!contactForm) return;
